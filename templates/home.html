@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<style>
+
+    .header {
+        padding: 20px;
+        background: #91a3b0;
+        color: white;
+        font-size: 20px;
+        text-align: right;
+      }
+
+      .footer {
+        padding: 20px;
+        text-align: center;
+        background: #91a3b0;
+        color: white;
+        font-size: 20px;
+        bottom: 0px;
+        position: fixed;
+        width: 100%;
+      
+      }
+
+</style>
+
+
+<header class="header">
+            
+            <a href="Register1"> <b>Register</b> </a>  &nbsp;
+            <a href="Aboutus"> <b>About</b> </a> &nbsp; 
+            <a href="home"> <b>Home</b> </a> 
+
+ 
+</header>
+
+
+<div>
+    
+    <!-- <h1>Hello {{name}}</h1> -->
+ 
+<h1 align="center">Welcome to Shoppeal Tech</h1>
+<br>
+
+<form action="login" method="post">
+    {% csrf_token %}
+    <fieldset enabled>
+    <legend><h2><b>Login Form</b></h2></legend>
+    <label for="">Enter Name:</label><br>
+    <input type="text" placeholder="Enter Name" maxlength="20" size="30" name="name" required><br><br>
+    <label for="">Enter Email Id: </label><br>
+    <input type="text" placeholder="Enter Email Id" maxlength="20" size="30" name="email" required><br><br>
+    <label for="">Enter Mobile No: </label><br>
+    <input type="text" placeholder="Enter Mobile Number" maxlength="13" size="30" name="mobile" required><br><br>
+    <label for="">Enter Password: </label><br>
+    <input type="password" placeholder="Enter Password" maxlength="15" size="30" name="password" required><br><br>
+    <input type="submit" value="Login">
+
+<div class="social">
+    <ul>
+        <li class="Google">
+           <!-- <a href="http://127.0.0.1/accounts/google/login"> Sign in with Google</a> --> 
+           <a href="http://apiappdb.com/accounts/google/login/callback/">Sign in With Google</a>
+        </li>
+    </ul>
+
+</div>
+
+
+
+</fieldset>
+</form>
+</div>
+
+<br><br>
+<hr>
+
+
+<br><br>
+<br><br>
+
+
+<footer class="footer">
+    
+    <a href="contactus"> <b>Contact us</b> </a>  
+     
+
+</footer>
+
+
+
+
+{% endblock %}
+

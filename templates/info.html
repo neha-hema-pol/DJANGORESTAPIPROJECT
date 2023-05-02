@@ -1,0 +1,61 @@
+#Project URL Name: http://apiappdb.com:8000
+
+
+#Database table:
+#CREATE TABLE userdata103 (
+# Uname TEXT,
+# Uemail TEXT UNIQUE
+# NOT NULL,
+# Umobile INT,
+# Upassword CHAR (15) UNIQUE
+# NOT NULL
+#);
+
+
+#Users and Passwords:
+#TABLE userdata103:
+Uname Uemail Umobile Upassword
+#john1 john1@example.com 1234567890 1234
+#john2 john2@example.com 1234567890 12345
+#john3 john3@example.com 1234567899 1212
+
+
+Two table are used userdata103 & userdata102:
+
+#Database table2:
+#CREATE TABLE userdata102 (
+# Uname TEXT NOT NULL,
+# Uemail TEXT NOT NULL,
+# Umobile INTEGER NOT NULL,
+# Upassword INTEGER NOT NULL
+#);
+
+#TABLE userdata102:
+#Uname Uemail Umobile Upassword
+#xyz xyz@example.com 1234567890 12345
+#xyz1 xyz1@example.com 1234567890 1232
+#xyz2 xyz2@example.com 1234567890 1423
+#xyz3 xyz3@example.com 987654321 24312
+#xyz4 xyz4@example.com 987654321 25321
+#xyz5 xyz5@example.com 987612345 63423
+#xyz6 xyz6@example.com 987654123 53423
+#xyz7 xyz7@example.com 1234567809 71234
+#xyz8 xyz8@example.com 1230987654 253332
+#xyz9 xyz9@example.com 1234509867 241111
+#xyz10 xyz10@example.com 1234098765 225342
+
+#In a development server, you can hide the port (because you don't want to see it anymore) by assigning it to port 80 if
+#it is not used by any other web service in the system (otherwise django will complain): python manage.py runserver 80
+
+# API Key: apiappdb5: AIzaSyBt9_MZ4Z5Ag4zyLDcOLclTWiU5zPihKnE
+
+#redirect uri: uri mismatch error:
+
+#Authorized JavaScript origins
+#http://localhost:8000
+
+#Authorized redirect URIs
+#http://127.0.0.1:8000/accounts/google/login/callback/
+#https://oauth.pstmn.io/v1/callback
+
+

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Database Output</title>
+    <style>
+        th,td{
+        border: 1px black solid;
+        }
+    </style>
+</head>
+<body>
+
+<h1>User Data:</h1>
+{% if dest1 %}
+
+ <table>
+     <tr>
+         <th>ID</th>
+         <th>User Name</th>
+         <th>Email Id</th>
+         <th>Mobile No</th>
+         <th>Password</th>
+     </tr>
+ <tr>
+     {% for st in dest1 %}
+     <td>{{st.id}}</td>
+     <td>{{st.name}}</td>
+     <td>{{st.email}}</td>
+     <td>{{st.mobile}}</td>
+     <td>{{st.password}}</td>
+ </tr>
+     {% endfor %}
+</table>
+{% else %}
+ <h1>No Data</h1>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+
+{% endblock %}
