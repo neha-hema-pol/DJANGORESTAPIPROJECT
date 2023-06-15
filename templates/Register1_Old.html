@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="Register" method="post">
+    {% csrf_token %}
+    <fieldset enabled>
+    <legend><h2><b>Register:</b></h2></legend>
+    <label for="">Enter Name:</label><br>
+    <input type="text" placeholder="Enter Name" maxlength="20" size="30" required name="Uname"><br><br>
+    <label for="">Enter Email Id: </label><br>
+    <input type="text" placeholder="Enter Email Id" maxlength="20" size="30" required name="Uemail"><br><br>
+    <label for="">Enter Mobile No: </label><br>
+    <input type="text" placeholder="Enter Mobile Number" maxlength="13" size="30" required name="Umobile"><br><br>
+    <label for="">Enter Password: </label><br>
+    <input type="password" placeholder="Enter Password" maxlength="15" size="30" required name="Upassword"><br><br>
+    <input type="submit" value="Register">
+</fieldset>
+</form>
+</div>
+
+<br><br>
+
+<a href="home"> <b>Home</b> </a> 
+
+<br><br>
+
+
+{% endblock %}

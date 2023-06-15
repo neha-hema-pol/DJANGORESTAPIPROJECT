@@ -1,39 +1,622 @@
-{% extends 'base.html' %}
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Sidebar Dashboard Template With Sub Menu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
 
-{% block content %}
 
 
-<br>
-<div align="center">Welcome to Shoppeal Tech <b>{{InputName}}</b></div>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+        *{
+          margin: 0;
+          padding: 0;
+          outline: none;
+          box-sizing: border-box;
+          font-family: 'Poppins', sans-serif;
+        }
+        body{
+          height: 100vh;
+          width: 100%;
+          background: rgba(219, 239, 239, 0.93);
+        }
+        .show-btn{
+          background: #fff;
+          padding: 10px 20px;
+          font-size: 20px;
+          font-weight: 500;
+          color: #3498db;
+          cursor: pointer;
+          box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        .show-btn, .container{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+        
+        input[type="checkbox"]{
+          display: none;
+        }
+        .container{
+          display: none;
+          background: #fff;
+          width: 410px;
+          padding: 30px;
+          box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        #show:checked ~ .container{
+          display: block;
+        }
+        .container .close-btn{
+          position: absolute;
+          right: 20px;
+          top: 15px;
+          font-size: 18px;
+          cursor: pointer;
+        }
+        .container .close-btn:hover{
+          color: #3498db;
+        }
+        .container .text{
+          font-size: 35px;
+          font-weight: 600;
+          text-align: center;
+        }
+        .container form{
+          margin-top: -20px;
+        }
+        .container form .data{
+          height: 45px;
+          width: 100%;
+          margin: 40px 0;
+        }
+        form .data label{
+          font-size: 18px;
+        }
+        form .data input{
+          height: 100%;
+          width: 100%;
+          padding-left: 10px;
+          font-size: 17px;
+          border: 1px solid silver;
+        }
+        form .data input:focus{
+          border-color: #3498db;
+          border-bottom-width: 2px;
+        }
+        form .forgot-pass{
+          margin-top: -8px;
+        }
+        form .forgot-pass a{
+          color: #3498db;
+          text-decoration: none;
+        }
+        form .forgot-pass a:hover{
+          text-decoration: underline;
+        }
+        form .btn{
+          margin: 30px 0;
+          height: 45px;
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+        }
+        form .btn .inner{
+          height: 100%;
+          width: 300%;
+          position: absolute;
+          left: -100%;
+          z-index: -1;
+          background: #3498db;
+          transition: all 0.4s;
+        }
+        form .btn:hover .inner{
+          left: 0;
+        }
+        form .btn button{
+          height: 100%;
+          width: 100%;
+          background: none;
+          border: none;
+          color: #fff;
+          font-size: 18px;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          cursor: pointer;
+        }
+        form .signup-link{
+          text-align: center;
+        }
+        form .signup-link a{
+          color: #3498db;
+          text-decoration: none;
+        }
+        form .signup-link a:hover{
+          text-decoration: underline;
+        }
+    
+    
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+            box-sizing: border-box;
+            font-family: "Roboto", sans-serif;
+        }
+        
+        body {
+            background: #fff;
+        }
+        
+        .wrapper .header {
+            z-index: 1;
+            background: #118b99;
+            position: fixed;
+            width: calc(100% - 0%);
+            height: 70px;
+            display: flex;
+            top: 0;
+        }
+        
+            .wrapper .header .header-menu {
+                width: calc(100% - 0%);
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px;
+            }
+        
+                .wrapper .header .header-menu .title {
+                    color: #fff;
+                    font-size: 25px;
+                    text-transform: uppercase;
+                    font-weight: 900;
+                }
+        
+                    .wrapper .header .header-menu .title span {
+                        color: #4CCEE8;
+                    }
+        
+                .wrapper .header .header-menu .sidebar-btn {
+                    color: #fff;
+                    position: absolute;
+                    margin-left: 240px;
+                    font-size: 22px;
+                    font-weight: 900;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    transition-property: color;
+                }
+        
+                    .wrapper .header .header-menu .sidebar-btn:hover {
+                        color: #4CCEE8;
+                    }
+        
+                .wrapper .header .header-menu ul {
+                    display: flex;
+                }
+        
+                    .wrapper .header .header-menu ul li a {
+                        background: #118b99;
+                        color: #000;
+                        display: block;
+                        margin: 0 10px;
+                        font-size: 18px;
+                        width: 34px;
+                        height: 34px;
+                        line-height: 35px;
+                        text-align: center;
+                        border-radius: 50%;
+                        transition: 0.3s;
+                        transition-property: background, color;
+                    }
+        
+                        .wrapper .header .header-menu ul li a:hover {
+                            background: #118b99;
+                            color: #fff;
+                        }
+        
+        .wrapper .sidebar {
+            z-index: 1;
+            background: #118b99;
+            position: fixed;
+            top: 70px;
+            width: 250px;
+            height: calc(100% - 9%);
+            transition: 0.3s;
+            transition-property: width;
+            overflow-y: auto;
+        }
+        
+            .wrapper .sidebar .sidebar-menu {
+                overflow: hidden;
+            }
+        
+                .wrapper .sidebar .sidebar-menu .profile img {
+                    margin: 20px 0;
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                }
+        
+                .wrapper .sidebar .sidebar-menu .profile p {
+                    color: #bbb;
+                    font-weight: 700;
+                    margin-bottom: 10px;
+                }
+        
+                .wrapper .sidebar .sidebar-menu .item {
+                    width: 250px;
+                    overflow: hidden;
+                }
+        
+                    .wrapper .sidebar .sidebar-menu .item .menu-btn {
+                        display: block;
+                        color: #fff;
+                        position: relative;
+                        padding: 25px 20px;
+                        transition: 0.3s;
+                        transition-property: color;
+                    }
+        
+                        .wrapper .sidebar .sidebar-menu .item .menu-btn:hover {
+                            color: #4CCEE8;
+                        }
+        
+                        .wrapper .sidebar .sidebar-menu .item .menu-btn i {
+                            margin-right: 20px;
+                        }
+        
+                        .wrapper .sidebar .sidebar-menu .item .menu-btn .drop-down {
+                            float: right;
+                            font-size: 12px;
+                            margin-top: 3px;
+                        }
+        
+                    .wrapper .sidebar .sidebar-menu .item .sub-menu {
+                        background: #3498DB;
+                        overflow: hidden;
+                        max-height: 0;
+                        transition: 0.3s;
+                        transition-property: background, max-height;
+                    }
+        
+                        .wrapper .sidebar .sidebar-menu .item .sub-menu a {
+                            display: block;
+                            position: relative;
+                            color: #fff;
+                            white-space: nowrap;
+                            font-size: 15px;
+                            padding: 20px;
+                            transition: 0.3s;
+                            transition-property: background;
+                        }
+        
+                            .wrapper .sidebar .sidebar-menu .item .sub-menu a:hover {
+                                background: #55B1F0;
+                            }
+        
+                            .wrapper .sidebar .sidebar-menu .item .sub-menu a:not(last-child) {
+                                border-bottom: 1px solid #8FC5E9;
+                            }
+        
+                        .wrapper .sidebar .sidebar-menu .item .sub-menu i {
+                            padding-right: 20px;
+                            font-size: 10px;
+                        }
+        
+                    .wrapper .sidebar .sidebar-menu .item:target .sub-menu {
+                        max-height: 500px;
+                    }
+        
+        .wrapper .main-container {
+            width: (100% - 250px);
+            margin-top: 70px;
+            margin-left: 250px;
+            padding: 15px;
+            background: url("bg_image.jpg") no-repeat;
+            background-size: cover;
+            height: 100vh;
+            transition: 0.3s;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .wrapper.collapse .sidebar {
+            width: 70px;
+        }
+        
+            .wrapper.collapse .sidebar .profile img,
+            .wrapper.collapse .sidebar .profile p,
+            .wrapper.collapse .sidebar a span {
+                display: none;
+            }
+        
+            .wrapper.collapse .sidebar .sidebar-menu .item .menu-btn {
+                font-size: 23px;
+            }
+        
+            .wrapper.collapse .sidebar .sidebar-menu .item .sub-menu i {
+                font-size: 18px;
+                padding-left: 3px;
+            }
+        
+        .wrapper.collapse .main-container {
+            width: calc(100% - 70px);
+            margin-left: 70px;
+        }
+        
+        .wrapper .main-container .card {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        #image {
+            height: 800px;
+            width: 2000;
+            background-repeat: no-repeat;
+            padding:5px;
+            background-image: url("bg_image.jpg");
+            background-size: 800px 800px;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            
+        }
+        
+        img {
+            width: 100%;
+        }
+        
+        
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+            top:200px;
+        }
+        
+        
+            
+        .float-container {
+            border: 3px solid #fff;
+            padding: 20px;
+        }
+        
+        .float-child {
+            width: 20%;
+            float: left;
+            padding: 10px;
+            border: 2px solid #118b99;
+        }
+        #block1 {
+            background-color: #ff0066;
+            margin: 10px 20px;
+            padding: 20px;
+            width: 180px;
+            float: left;
+        }
+        
+        .relative {
+            position: relative;
+        }
+        
+        .div4 {
+            position: absolute;
+            left: 0;
+            position: center;
+            font-size: 150%;
+            font-family: verdana;
+            text-align: center;
+            color: #fc9003;
+        }
+        
+        .div5 {
+            position: absolute;
+            left: 30%;
+            transform: translateX(-50%);
+            position: center;
+            font-size: 150%;
+            font-family: verdana;
+            font-size: 150%;
+            text-align: center;
+            color: #fc9003;
+        }
+        
+        
+        .div6 {
+            position: absolute;
+            right: 30%;
+            color: #fc9003;
+            font-size: 150%;
+        }
+        .div7 {
+            position: absolute;
+            right: 0;
+            color: #fc9003;
+            font-size: 150%;
+        }
+        .topnav input[type=text] {
+            float: right;
+            padding: 6px;
+            border: none;
+            margin-top: 8px;
+            margin-right: 16px;
+            font-size: 17px;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        
+        .box {
+            float: left;
+            width: 20%;
+            padding: 50px;
+        }
+        /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+        @media screen and (max-width: 1000px) 
+        {
+            .topnav a, .topnav input[type=text] {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 300%;
+                margin: 0;
+                padding: 14px;
+            }
+        
+            .topnav input[type=text] {
+                border: 1px solid #ccc;
+            }
+        }
+        .Shoppeal_Tech{
+            font-size: 30px;
+            color: #bbb;
+        }
+           
+    </style>
+
+
+</head>
+<body>
+
+    <!--wrapper start-->
+    <div class="wrapper">
+        <!--header menu start-->
+        <div class="header">
+            <div class="header-menu">
+                <a href="#" class="Shoppeal_Tech">
+                  <!-- <img id="logo" src="https://www.makeintern.com/admin/uploaded_files/employer_company_logo/Screenshot_2023-02-13-18-16-40-777_com46922a0880a8f11f8f69cbb52b1396be.jpg" width="150" height="90"> --> 
+                  Shoppeal Tech
+
+                </a>
+                <div class="sidebar-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul>
+                    <div class="topnav">
+    <input type="text" placeholder="Search..">
+</div>
+            <li><a href="#"><i class="fas fa-search"></i></a></li>
+            <li><a href="#"><i class="fas fa-bell"></i></a></li>
+            
+            </ul>
+        </div>
+        </div>
+        <!--header menu end-->
+        <!--sidebar start-->
+        <div class="sidebar">
+            <div class="sidebar-menu">
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-home"></i><span>Home</span>
+                    </a>
+                </li>
+
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-desktop"></i><span>Dashboard</span>
+                    </a>
+                </li>
+
+
+
+                <li class="item" id="profile">
+                    <a href="#profile" class="menu-btn">
+                        <i class="fas fa-user-circle"></i><span>View details</span>
+                    </a>
+
+                <!--
+                   
+                </li>
+                <li class="item" id="personal details">
+                    <a href="#messages" class="menu-btn">
+                        <i class="fas fa-envelope"></i><span>Documents </span>
+                    </a>
+                    
+                </li>
+                <li class="item" id="settings">
+                    <a href="#settings" class="menu-btn">
+                        <i class="fas fa-cog"></i><span>Settings </span>
+                    </a>
+                    
+                </li>
+                <li class="item">
+                    <a href="#" class="menu-btn">
+                        <i class="fas fa-info-circle"></i><span>help</span>
+                    </li>
+                -->
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                
+                    <li class="item">
+                        <a href="#" class="menu-btn">
+                            <span></span>
+                    <li class="item">
+                        <a href="http://apiappdb.com/accounts/google/login/callback/" class="menu-btn">
+                            <i class="fas fa-power-off"></i><span>Logout</span>
+                        </a>
+
+
+            </div>
+        </div>
+        <!--sidebar end-->
+        <!--main container start-->
+
+
+        <div class="main-container">
+            <div>
+                <h3>User Data:</h3>
+                <br>
+                <hr>
+                <br>
+                {{DisplayData3}}
+                <br><br>
+                <hr>
+
+
+            </div>
+            <div class="container ">
+            
+              <!-- <img src="bg_image.jpg" alt="img" height="600" width="1400"> --> 
+                <div class="bottom-left">
+                
+
+                
 
 <br><br>
 
+<a href="home">Home</a>
+                    
 
-<h2>User Data:</h2>
-<hr>
-
-<h4>Format 1:</h4>
-
-{{DisplayData1}}
-
-<br><br>
-<hr>
-
-<h4>Format 2:</h4>
-
-{{DisplayData2}}
-
-<br><br>
-<hr>
-
-<h4>Format 3:</h4>
-
-{{DisplayData3}}
+                </div>
+               
+                    </div>
+                </div>
 
 
-<hr>
+                <!--main container end-->
+                <!--wrapper end-->
 
-<br><br>
-<a href="home"> <b>Home</b> </a> 
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".sidebar-btn").click(function () {
+                            $(".wrapper").toggleClass("collapse");
+                        });
+                    });
+                </script>
 
-{% endblock %}
+
+
+
+</body>
+</html>

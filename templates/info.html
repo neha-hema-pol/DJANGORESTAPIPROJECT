@@ -12,12 +12,27 @@
 #);
 
 
+
+
+#....................................................................................................................................
+# User Login :
 #Users and Passwords:
 #TABLE userdata103:
 Uname Uemail Umobile Upassword
 #john1 john1@example.com 1234567890 1234
 #john2 john2@example.com 1234567890 12345
 #john3 john3@example.com 1234567899 1212
+
+#.....................................................................................................................................
+
+
+#admin username: dipak
+#admin password: Dipak@12345
+
+
+#.....................................................................................................................................
+
+
 
 
 Two table are used userdata103 & userdata102:
@@ -44,6 +59,10 @@ Two table are used userdata103 & userdata102:
 #xyz9 xyz9@example.com 1234509867 241111
 #xyz10 xyz10@example.com 1234098765 225342
 
+
+
+#.....................................................................................................................................
+
 #In a development server, you can hide the port (because you don't want to see it anymore) by assigning it to port 80 if
 #it is not used by any other web service in the system (otherwise django will complain): python manage.py runserver 80
 
@@ -57,5 +76,47 @@ Two table are used userdata103 & userdata102:
 #Authorized redirect URIs
 #http://127.0.0.1:8000/accounts/google/login/callback/
 #https://oauth.pstmn.io/v1/callback
+
+
+#.....................................................................................................................................
+
+
+# user id --- Shashank
+  password -- Pass@123
+
+#......................................................................................................................................
+
+<!--
+
+.........................................
+
+Admin Panel Username & Password:
+Username: dipak
+Password: Dipak@12345
+
+..........................................
+
+Postman methods:
+1. POST: http://127.0.0.1:80/register/
+2. GET: http://127.0.0.1:80/student/
+
+..........................................
+
+To Hide port no from URL use port 80 in settings.py:
+from django.core.management.commands.runserver import Command as runserver
+runserver.default_port = "80"
+
+...........................................
+
+How to run project??:
+1. first activate the virtual environment by going to scripts and running command .\activate
+2. now run the project by running command: python manage.py run server
+3. Then go to thunder client and run POST query using one username
+and password, we will get access_token.
+4. copy that token and go to GET query and in Bearer token paste that access_token 
+and make GET request, we will get API data.
+NOTE: Please note that our project is running on port no 80.
+
+-->
 
 

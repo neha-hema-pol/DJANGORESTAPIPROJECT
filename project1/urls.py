@@ -18,12 +18,24 @@ from django.contrib import admin
 from django.urls import path, include
 from apiapp import views
 from django.views.generic import TemplateView
+from rest_framework.authtoken import views
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+
 
 urlpatterns = [
     path('', include('apiapp.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('rhome/', TemplateView.as_view(template_name='rhome.html'), name='rhome')
-    
-  
+    path('rhome/', TemplateView.as_view(template_name='rhome.html'), name='rhome'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api-token-auth/', views.obtain_auth_token),
+      
 ]
+
+

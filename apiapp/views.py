@@ -6,6 +6,14 @@ from .models import Destination, User1, Register
 import json
 from .ReadJSONData import myjsonfile
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import *
+from .serializers import *
+from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
+
+
 
 
 
@@ -352,6 +360,223 @@ def Register1(request):
 
 def my_redirect1(request):
    return redirect("https://github.com/")
+
+
+
+#.....................................................................................................
+
+
+@api_view(['GET'])
+#def home(request):
+def Out1(request):
+    student_objs = Student.objects.all()
+    serializer = StudentSerializer(student_objs, many=True)
+
+    return Response({'status' : 200, 'payload' : serializer.data})
+
+
+
+
+from rest_framework_simplejwt.tokens import RefreshToken
+
+
+
+class RegisterUser(APIView):
+
+    def post(self, request):
+        serializer = UserSerializer(data = request.data)
+
+        if not serializer.is_valid():
+            return Response({'status':403, 'message':'Something went wrong'})
+    
+        serializer.save()
+
+        user = User.objects.get(username = serializer.data['username'])
+        refresh = RefreshToken.for_user(user)
+
+        return Response({'status': 200, 
+        'payload': serializer.data, 
+        'refresh': str(refresh),
+        'access': str(refresh.access_token), 
+        'message': 'you sent'})
+
+
+
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
+
+
+
+
+# http://127.0.0.1:8000/student/
+# path('student/', StudentAPI.as_view()),
+
+class StudentAPI(APIView):
+
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+
+    def get(self, request):
+        student_objs = Student.objects.all()
+        serializer = StudentSerializer(student_objs, many=True)
+        print(request.user)
+        return Response({'status': 200, 'payload': serializer.data,'message': 'data loaded'})
+
+
+    def post(self, request):
+            data = request.data
+            serializer = StudentSerializer(data = request.data)
+
+            if not serializer.is_valid():
+                print(serializer.errors)
+                return Response({'status':403, 'message':'Something went wrong here'})
+    
+            serializer.save()
+
+            return Response({'status': 200, 'payload': serializer.data, 'message': 'you sent'})
+
+
+
+    def patch(self, request):
+        try:
+            student_obj = Student.objects.get(id= request.data['id'])
+    
+            serializer = StudentSerializer(student_obj, data = request.data, partial=True)
+
+            if not serializer.is_valid():
+                print(serializer.errors)
+                return Response({'status':403, 'message':'Something went wrong'})
+    
+            serializer.save()
+
+            return Response({'status': 200, 'payload': serializer.data, 'message': 'you sent'})
+
+        except Exception as e:
+            return Response({ 'status':403, 'message':'you have entered wrong id'})
+
+
+
+    def put(self, request):
+        pass
+
+    def delete(self, request):
+        try:
+
+            student_obj = Student.objects.get(id=id)
+            student_obj.delete()
+            return Response({'status':200, 'message':'deleted'})
+    
+        except Exception as e:
+            print(e)
+            return Response({'status':403, 'message':'invalid id'})
+
+
+
+
+
+
+
+
+"""
+#.................................................................................................
+# Create your views here.
+
+#def home(request):
+#    return render(request, 'home.html')
+
+
+# API of GET request
+
+@api_view(['GET'])
+def home(request):
+    student_objs = Student.objects.all()
+    serializer = StudentSerializer(student_objs, many=True)
+
+    return Response({'status' : 200, 'payload' : serializer.data})
+
+
+# API of POST request
+
+@api_view(['POST'])
+def post_student(request):
+    data = request.data
+    serializer = StudentSerializer(data = request.data)
+
+    if not serializer.is_valid():
+        print(serializer.errors)
+        return Response({'status':403, 'message':'Something went wrong'})
+    
+    serializer.save()
+
+    return Response({'status': 200, 'payload': serializer.data, 'message': 'you sent'})
+
+
+
+# API of PUT request
+
+@api_view(['PUT'])
+def update_student(request, id):
+    try:
+        student_obj = Student.objects.get(id=id)
+    
+        serializer = StudentSerializer(student_obj, data = request.data)
+
+        if not serializer.is_valid():
+            print(serializer.errors)
+            return Response({'status':403, 'message':'Something went wrong'})
+    
+        serializer.save()
+
+        return Response({'status': 200, 'payload': serializer.data, 'message': 'you sent'})
+
+    except Exception as e:
+        return Response({ 'status':403, 'message':'you have entered wrong id'})
+
+
+
+# API of DELETE request
+
+@api_view(['DELETE'])
+def delete_student(request, id):
+    try:
+
+        student_obj = Student.objects.get(id=id)
+        student_obj.delete()
+        return Response({'status':200, 'message':'deleted'})
+    
+    except Exception as e:
+        print(e)
+        return Response({'status':403, 'message':'invalid id'})
+
+
+
+
+@api_view(['GET'])
+def get_book(request):
+    book_objs = Book.objects.all()
+    serializer = BookSerializer(book_objs, many=True)
+    return Response({'status':200, 'payload':serializer.data})
+
+
+#...................................................................................
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
